@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchSingleImage } from "../store/imageSlice";
 
 const SingleImage = () => {
@@ -25,9 +25,12 @@ const SingleImage = () => {
                         src={singleImage?.image} 
                         alt="Fetched"
                     />
-                    <div className="text-sm mt-5">
-                        <button className="bg-blue-500 text-white px-3 py-1 rounded">
+                    <div className="text-sm mt-5 space-x-4">
+                        <Link to={`/editImage/${singleImage._id}`} className="bg-blue-500 text-white px-3 py-1 rounded">
                             Edit
+                        </Link>
+                        <button className="bg-blue-500 text-white px-3 py-1 rounded">
+                            delete
                         </button>
                     </div>
                 </div>

@@ -26,6 +26,30 @@ const imageSlice=createSlice({
 export const {setImageData,setStatus,setSingleImage} =imageSlice.actions
 export default imageSlice.reducer
 
+//add the image
+export function addImage(data){
+    return async function addImageTHunk(dispatch) {
+        dispatch(setStatus(STATUS.LOADING));
+        try{
+            const response=await API.post("/api/image",data,{
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                }
+            })
+            if(response.status===200){
+                dispatch(setStatus(STATUS.SUCCESS));
+            }else{
+                dispatch(setStatus(STATUS.ERROR));
+            }
+        }catch(err){
+            dispatch(setStatus(STATUS.ERROR));
+        }
+        
+    }
+
+}
+
+
 //fetch all images
 export function fetchImage(){
     return async function fetchImage(dispatch) {
